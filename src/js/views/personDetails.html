@@ -1,0 +1,33 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+-->
+<div class="oj-hybrid-padding oj-flex">
+    <oj-messages messages="[[errorMessagesProvider]]" position="{}" display="notification"></oj-messages>
+    <oj-flex class="oj-sm-12">
+        <h1 class="header-title" style="font-family:'GCairo'">التفاصيل الكاملة للمواطن</h1>
+        <br>
+    </oj-flex>
+
+    <oj-buttonset-one class="oj-flex-item oj-sm-12 oj-md-12" id="drinkset" value="{{subRouter.stateId}}">
+        <!-- ko foreach: subRouter.states -->
+        <oj-bind-if test="[[id!='temp']]">
+            <oj-option disabled="[[$parent.showHideButton(id)]]" value='[[id]]'>
+                <!-- <span data-bind="text: label"></span> -->
+                <!-- $parent.showHideButton(id)?'color:red':'' -->
+                <span>
+                    <!-- <oj-bind-text value="[[$parent.showHideButton(id) ?'لا يوجد'+ label :label]]"> </oj-bind-text> -->
+                    <oj-bind-if test="$parent.showHideButton(id)">
+                        <span style="color:red;font-weight: bold;font-size: 1.3em;">لا يوجد</span>
+                    </oj-bind-if>
+                    <oj-bind-text value="[[label]]"> </oj-bind-text>
+                    <span style="color:gold ;display: none;" :id="[[id+'_loader']]"
+                        class="fa fa-spinner fa-spin fa-2x"></span>
+                </span>
+            </oj-option>
+        </oj-bind-if>
+        <!-- /ko -->
+    </oj-buttonset-one>
+    <oj-module role="main" class="oj-web-applayout-max-width oj-web-applayout-content" config="[[moduleConfig]]">
+    </oj-module>
+</div>

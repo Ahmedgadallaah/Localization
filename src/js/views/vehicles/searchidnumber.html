@@ -1,0 +1,117 @@
+<div class="oj-hybrid-padding">
+  <oj-messages messages="[[errorMessagesProvider]]" position="{}" display="notification"></oj-messages>
+  <h5>إختر طريقة البحث</h5>
+  <oj-validation-group id="tracker" valid="{{ groupValid }}">
+
+    <oj-radioset id="radioSetId" class="oj-choice-direction-row" labelled-by="mainlabelid"
+      value="{{ currentSearchType }}">
+      <oj-option id="one" value="[[1]]"> الرقم القومى</oj-option>
+
+      <oj-form-layout id="form-container" max-columns='2' label-edge='start' label-width="50%">
+
+        <oj-input-text clear-icon="conditional" id="carIdentity" raw-value="{{ identityNum }}"
+          messages-custom="[[identityNumMessages]]" value="{{ identityNum }}"
+          data-bind="value: identityNum,css:{greenStyle:currentSearchType()==1||currentSearchType()==4 ,disable:currentSearchType()==2||currentSearchType()==3}"
+          label-hint="الرقم القومي">
+        </oj-input-text>
+        <oj-button on-oj-action="[[doSearch]]" disabled="[[isIdNumButtonDisabled]]" id="btnSearch" class="oj-button-lg">
+          <span style="color:blue ;font-weight: bold;display: none" id="idnum_loader"
+            class="fa fa-spinner fa-spin fa-2x"></span>
+          بحث</oj-button>
+      </oj-form-layout>
+      <hr>
+
+      <oj-option id="three" value="[[3]]"> رقم اللوحة (حروف وارقام)</oj-option>
+      <oj-form-layout id="form-container" max-columns='2' label-edge='start' label-width="50%">
+        <oj-input-text id="plateNumAlphaId" clear-icon="conditional" raw-value="{{ plateNumAlpha }}"
+          data-bind="value: plateNumAlpha,css:{greenStyle:currentSearchType()==3,disable:currentSearchType()!=3}"
+          value="{{ plateNumAlpha }}" messages-custom="[[plateNumAlphaNumMessages]]"
+          label-hint="رقم اللوحة (حروف وأرقام)">
+        </oj-input-text>
+        <oj-button on-oj-action="[[doSearch]]" disabled="[[isPLateNumAlphaButtonDisabled]]" id="btnSearch"
+          class="oj-button-lg">
+          <span style="color:blue ;font-weight: bold;display: none" id="platealphanum_loader"
+            class="fa fa-spinner fa-spin fa-2x"></span>
+          بحث</oj-button>
+      </oj-form-layout>
+      </oj-bind-if>
+      <hr>
+      <oj-option id="two" value="[[2]]"> رقم اللوحة (ارقام فقط)</oj-option>
+      <oj-form-layout id="form-container" max-columns='4' label-edge='start' label-width="50%" colspan-wrap="nowrap"
+        direction="row">
+
+        <oj-input-text clear-icon="conditional" id="caroldIdentity" raw-value="{{ plateNum }}" data-bind="value:
+        plateNum,css:{greenStyle:currentSearchType()==2,disable:currentSearchType()!=2}" value="{{ plateNum }}"
+          label-hint=" رقم اللوحة (أرقام فقط)" messages-custom="[[plateNumMessages]]">
+        </oj-input-text>
+
+
+
+        <!-- <oj-label for="combobox">نوع الترخيص</oj-label> -->
+        <oj-select-one data-bind="css:{greenStyle:currentSearchType()==2,disable:currentSearchType()!=2}" id="select"
+          label-hint=" نوع الترخيص" options="[[types]]" value="{{ selectedType }}">
+        </oj-select-one>
+
+        <!-- <oj-label for="combobox">إختر المحافظة</oj-label> -->
+        <oj-select-one id="select" data-bind="css:{greenStyle:currentSearchType()==2,disable:currentSearchType()!=2}"
+          options="[[govs]]" label-hint=" إختر المحافظة" value="{{ selectedGov }}">
+        </oj-select-one>
+
+        <oj-button label-hint='' on-oj-action="[[doSearch]]" disabled="[[isPLateNumButtonDisabled]]"
+          class="oj-button-lg">
+          <span style="color:blue ;font-weight: bold;display: none" id="platenum_loader"
+            class="fa fa-spinner fa-spin fa-2x"></span>
+          بحث</oj-button>
+      </oj-form-layout>
+
+
+
+      <!-- <oj-option id="four" value="[[4]]"> رخصه قيادة</oj-option> -->
+    </oj-radioset>
+    <br>
+
+
+
+
+  </oj-validation-group>
+
+  <!-- <h2 id="load">جاري تحميل البيانات</h2>
+  <div id="loader" class="loader"></div> -->
+
+  <br /><br />
+
+  <oj-bind-if test="[[showCarsTable() && vechils().length>0 ]]">
+    <h2>بيانات المركبات</h2>
+    <oj-table id="table" aria-label="Departments Table" data-bind="event: {selectionChanged: carTableListener}"
+      data="[[carPagingDataProvider]]" style="width: 100%" selection-mode='{"row": "single"}'
+      dnd='{"reorder": {"columns": "enabled"}}' columns="[[carTableColumns]]">
+    </oj-table>
+    <oj-paging-control id="paging" data="[[carPagingDataProvider]]" page-size="10" slot="bottom">
+    </oj-paging-control>
+  </oj-bind-if>
+
+
+  <oj-bind-if test="[[showDriveLicenseTable() && drives().length>0]]">
+    <h2>بيانات الترخيص</h2>
+    <oj-table id="drivestable" aria-label="Departments Table" data-bind="event: {selectionChanged: driveTableListener}"
+      data="[[drivePagingDataProvider]]" style="width: 100%" selection-mode='{"row": "multiple", "column": "multiple"}'
+      dnd='{"reorder": {"columns": "enabled"}}' columns="[[driveTableColumns]]">
+    </oj-table>
+    <oj-paging-control id="paging" data="[[drivePagingDataProvider]]" page-size="10" slot="bottom">
+    </oj-paging-control>
+  </oj-bind-if>
+</div>
+
+<br /><br />
+
+<script type="text/html" id="serial">
+  <td>
+    <oj-bind-text value="[[$context.cellContext.status.rowIndex + 1]]"></oj-bind-text>
+    <!--    <span data-bind="text:$parent.getCol($context)"></span>-->
+  </td>
+</script>
+<script type="text/javascript">
+  var viewModel = {
+    cellphoneNumber: ""
+  };
+</script>

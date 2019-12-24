@@ -1,0 +1,74 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<oj-messages messages="[[errorMessagesProvider]]" position="{}" display="notification"></oj-messages>
+<br><br>
+<img src="css/images/logo.png" alt="bulleted list image" width="100" height="100" style="margin-right:46%;" />
+<h1 class="moduleTitleStyle" style="text-align: center; ">تسجيل الدخول</h1>
+<div style="margin-left:160px">
+
+    <div id="loader" class="loader"></div>
+
+</div>
+<br>
+<div
+    style="background-color:#ececec; padding:20px;text-align:center; width:300px; margin-right:37.5%; border-radius:10px; ">
+    <div class="oj-hybrid-padding">
+        <div id="sampleDemo" style="text-align: center" class="demo-container">
+            <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+                <div id="form-container" class="oj-form-layout">
+                    <div class="oj-form">
+                        <div class="oj-flex">
+                            <div class="oj-flex-item">
+                                <oj-label class="loginTextStyle labelCairoFont" style="font-size: 16px; color: blue;"
+                                    show-required for="username">الإسم</oj-label>
+                                <oj-input-text style="border-radius:10%;" id="username"
+                                    messages-custom="{{validateMessages}}" required value="{{username}}">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                        <div class="oj-flex">
+                            <div class="oj-flex-item">
+                                <oj-label class="loginTextStyle labelCairoFont" style="font-size: 16px; color: blue;"
+                                    for="password" show-required>الرقم السري</oj-label>
+                                <oj-input-password class="loginInputStyle" id="password" required value="{{password}}">
+                                </oj-input-password>
+                            </div>
+                        </div>
+
+                        <div>
+                            <oj-input id="my_form" type="submit" style="display: none"></oj-input>
+                        </div>
+
+
+
+
+                        <oj-button class="loginButtonStyle labelCairoFont" id='submit' on-click='[[doLogin]]'
+                            style="background-color:blue; border-radius:20px; font-size: 16px; margin-top:10px;">
+                            <span>دخول</span>
+                            <span style="color:blue ;font-weight: bold;display: none" id="login_loader"
+                                class="fa fa-spinner fa-spin fa-2x"></span>
+                        </oj-button>
+                        <div id="userError">
+                            <span id="userError" style="color:red; visibility:hidden;">الإسم أو الرقم السري غير
+                                صحيح</span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- <oj-button class="loginButtonStyle labelCairoFont" id='settings' on-click='[[changeSettings]]'>
+                     <span>Settings</span></oj-button> -->
+
+                    <!--                <oj-button id='submit' on-click='[[checkIfLoginDone]]'>Check</oj-button>-->
+                    <!--                <oj-button id='submit' on-click='[[doLogout]]'>Log Out</oj-button>-->
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>

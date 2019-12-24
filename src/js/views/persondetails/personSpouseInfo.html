@@ -1,0 +1,59 @@
+<br>
+
+<div class="person-details">
+    <oj-messages messages="[[errorMessagesProvider]]" position="{}" display="notification"></oj-messages>
+    <!--      <oj-messages messages="[[errorMessagesProvider]]"></oj-messages>-->
+
+    <div data-bind="visible:showLoadDialog" id="loadPanel" style=float:left>
+
+        <!-- <span style="color:red">جارى التحميل...</span>
+        <oj-button on-oj-action="[[refresh]]">
+            تحديث
+        </oj-button> -->
+    </div>
+
+
+
+    <div class="details-content" style="width:98%">
+        <h1 class="header-title">معلومات الزوج/الزوجة</h1>
+
+        <br><br>
+
+        <oj-form-layout max-columns='2' width="100%" label-edge='start' label-width="20%">
+            <oj-input-text id="idNum" style="max-width:90%" readonly value="[[personaSpouseData().idNum]]"
+                label-hint="الرقم القومي"></oj-input-text>
+            <oj-input-text id="fullName" style="max-width:90%" readonly value="[[personaSpouseData().fullName]]"
+                label-hint="الاسم الكامل"></oj-input-text>
+            <oj-input-text id="spouseMotherName" style="max-width:90%" readonly
+                value="[[personaSpouseData().spouseMotherName]]" label-hint="اسم الام "></oj-input-text>
+            <oj-input-text id="eventDate" style="max-width:90%" readonly value="[[personaSpouseData().eventDate]]"
+                label-hint="تاريخ الزواج"></oj-input-text>
+            <oj-input-text id="eventRegNo" style="max-width:90%" readonly value="[[personaSpouseData().eventRegNo]]"
+                label-hint="رقم وثيقة الزواج"></oj-input-text>
+            <oj-input-text id="spouseBirthDate" style="max-width:90%" readonly
+                value="[[personaSpouseData().spouseBirthDate]]" label-hint="تاريخ ميلاد "></oj-input-text>
+            <oj-input-text id="spouseType" style="max-width:90%" readonly value="[[getMarStatus()]]"
+                label-hint="حالة الزواج"></oj-input-text>
+        </oj-form-layout>
+
+    </div>
+    <h2 id="load">جاري تحميل البيانات</h2>
+    <div id="loader" class="loader"></div>
+    <br>
+
+    <oj-table id='table' aria-label='Departments' data-bind="event: {selectionChanged: tableListener}"
+        on-oj-before-current-row="[[beforeCurrentRow]]" data='[[pagingDataProvider]]'
+        selection-mode='{"row": "multiple", "column": "multiple"}' dnd='{"reorder": {"columns": "enabled"}}'
+        width="100%" columns='[[tableColumns]]'>
+    </oj-table>
+    <oj-paging-control id="paging" data="[[pagingDataProvider]]" page-size="10" slot="bottom">
+    </oj-paging-control>
+</div>
+
+<br><br>
+<script type="text/html" id="serial">
+    <td>
+        <oj-bind-text value="[[$context.cellContext.status.rowIndex + 1]]"></oj-bind-text>
+        <!--    <span data-bind="text:$parent.getCol($context)"></span>-->
+    </td>
+</script>

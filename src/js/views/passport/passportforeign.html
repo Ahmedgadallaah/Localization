@@ -1,0 +1,70 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+-->
+<div class="oj-hybrid-padding oj-flex">
+
+  <oj-flex class="oj-sm-12">
+    <!-- <h1 class="header-title">الاستعلام عن المعلومات الشخصية  للسجين</h1>
+              <div class="header-paragraph">
+                  يمكنك من هنا الاستعلام عن المعلومات الشخصية  للسجين من خلال طريقتين.
+              </div> -->
+    <oj-radioset id="radioSetId" labelled-by="mainlabelid" value="{{currentSearchType}}">
+      <oj-option id="blueopt" value="[[1]]">رقم الجواز</oj-option>
+      <oj-option id="greenopt" value="[[2]]">بيانات اخرى</oj-option>
+    </oj-radioset>
+    <br>
+  </oj-flex>
+  <oj-messages messages="[[errorMessagesProvider]]" position="{}" display="notification"></oj-messages>
+  <div class="oj-hybrid-padding">
+    <oj-form-layout id="myform" max-columns='4' label-edge='start' label-width="50%">
+      <oj-bind-if test="[[currentSearchType() == 1]]">
+        <oj-input-text clear-icon="conditional" id="placeNo" value="{{pass_no}}" label-hint="رقم الجواز">
+        </oj-input-text>
+        <oj-input-text clear-icon="conditional" id="nickName" value="{{ppasstype}}" label-hint="نوع الجواز">
+        </oj-input-text>
+        <!-- <oj-input-text clear-icon="conditional" id="placeNo" value="{{pnationality}}" label-hint="الجنسية"></oj-input-text> -->
+        <oj-label for="combobox"> الجنسية </oj-label>
+        <oj-select-one id="select" options="[[thenats]]" value="{{pnationality}}"></oj-select-one>
+      </oj-bind-if>
+      <oj-bind-if test="[[currentSearchType() == 2]]">
+        <oj-input-text clear-icon="conditional" id="firstName" value="{{pname}}" label-hint="الإسم"></oj-input-text>
+        <oj-label for="combobox">(بحث منافذ) </oj-label>
+        <oj-select-one id="select" options="[[theports]]" value="{{pport_id}}"></oj-select-one>
+
+        <oj-input-text clear-icon="conditional" id="placeNo" value="{{pmovement_type}}" label-hint="نوع الحركة">
+        </oj-input-text>
+        <oj-input-date clear-icon="conditional" id="birthDateStart" value="{{pmovementdatefrom}}"
+          label-hint="تاريخ الحركة من">
+        </oj-input-date>
+        <oj-input-date clear-icon="conditional" id="birthDateEnd" value="{{pmovementdateto}}"
+          label-hint="تاريخ الحركة إلي">
+        </oj-input-date>
+        <oj-input-date clear-icon="conditional" id="birthDateStart" value="{{pbirthdatefrom}}"
+          label-hint="تاريخ الميلاد من">
+        </oj-input-date>
+        <oj-input-date clear-icon="conditional" id="birthDateEnd" value="{{pbirthdateto}}"
+          label-hint="تاريخ الميلاد الى">
+        </oj-input-date>
+      </oj-bind-if>
+
+      <oj-button id="submit" style="margin-right:50px;" class="oj-button-lg" on-oj-action="[[doSearch]]"> بحث
+      </oj-button>
+
+
+    </oj-form-layout>
+    <br>
+    <!-- <h2 id="load">جاري تحميل البيانات</h2>
+    <div id="loader" class="loader"></div> -->
+    <!-- <oj-bind-if test="[[redrivedData().length > 0]]">  -->
+
+
+
+
+
+  </div>
+
+
+  <oj-module role="main" class="oj-web-applayout-max-width oj-web-applayout-content" config="[[moduleConfig]]">
+  </oj-module>
+</div>

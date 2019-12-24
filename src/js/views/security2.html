@@ -1,0 +1,54 @@
+<br>
+    <div class="person-details">
+            <oj-messages messages="[[errorMessagesProvider]]" position="{}"  display="notification"></oj-messages>
+<!--      <oj-messages messages="[[errorMessagesProvider]]"></oj-messages>-->
+
+<!-- <div data-bind="visible:showLoadDialog" id="loadPanel" style=float:left> 
+
+    <span style="color:red">جارى التحميل...</span>
+<oj-button on-oj-action="[[refresh]]">
+تحديث
+</oj-button>
+</div> -->
+
+<div class="details-content" style="width:95%">
+    <h3 class="header-title">البيانات الشخصية </h3>              
+           
+      
+    <br><br>
+
+    <oj-form-layout max-columns='2' width="100%" label-edge='start' label-width="20%">
+        <oj-input-text id="idNum" style="max-width:90%" readonly value="[[]]" label-hint="رقم الإدراج"></oj-input-text>
+        <oj-input-text id="fullName" style="max-width:90%" readonly  value="[[]]"  label-hint="الإسم"></oj-input-text>
+        <oj-input-text id="fullName" style="max-width:90%" readonly  value="[[]]"  label-hint="الشهرة"></oj-input-text>
+        <oj-input-text id="spouseMotherName" style="max-width:90%" readonly value="[[]]" label-hint="المهنة "></oj-input-text>
+        <oj-input-text id="spouseMotherName" style="max-width:90%" readonly value="[[]]" label-hint="تاريخ الميلاد "></oj-input-text>
+        <oj-input-text id="eventDate" style="max-width:90%" readonly value="[[]]" label-hint="السن"></oj-input-text>
+        <oj-input-text id="eventRegNo" style="max-width:90%" readonly value="[[]]" label-hint="نوع إثبات الشخصية"></oj-input-text>
+        <oj-input-text id="spouseBirthDate" style="max-width:90%" readonly value="[[]]" label-hint="رقم إثبات الشخصية"></oj-input-text>
+     
+    </oj-form-layout> 
+
+    
+</div>
+<br><br> 
+        <h3 class="header-title">القضايا </h3>   
+        <div class="details-content" style="width:95%">
+                      
+            <br><br>
+            <oj-form-layout max-columns='2' width="100%" label-edge='start' label-width="20%">
+                <oj-input-text id="idNum" style="max-width:90%" readonly value="[[]]" label-hint="رقم القضية"></oj-input-text>
+                <oj-input-text id="fullName" style="max-width:90%" readonly  value="[[]]"  label-hint="رقم الحصر"></oj-input-text>
+                <oj-input-text id="fullName" style="max-width:90%" readonly  value="[[]]"  label-hint="الحكم"></oj-input-text>
+                <oj-input-text id="spouseMotherName" style="max-width:90%" readonly value="[[]]" label-hint="كلي مستأنف "></oj-input-text>
+                <oj-input-text id="spouseMotherName" style="max-width:90%" readonly value="[[]]" label-hint="التهمة "></oj-input-text>
+                <oj-input-text id="eventDate" style="max-width:90%" readonly value="[[]]" label-hint="العقوبة"></oj-input-text>
+                <oj-input-text id="eventRegNo" style="max-width:90%" readonly value="[[]]" label-hint="كف البحث"></oj-input-text>       
+            </oj-form-layout> 
+
+            
+    </div>
+
+
+</div>
+<br><br>

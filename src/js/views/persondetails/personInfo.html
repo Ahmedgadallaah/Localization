@@ -1,0 +1,116 @@
+<br>
+<div class="oj-hybrid-padding person-details">
+   <oj-messages messages="[[errorMessagesProvider]]" position="{}" display="notification"></oj-messages>
+   <!-- <oj-messages messages="[[errorMessagesProvider]]"  display="notification"></oj-messages>-->
+   <div id="loadPanel" data-bind="visible:showLoadDialog" style=float:left>
+      <!-- <span style="color:red">جارى التحميل...</span>
+      <oj-button on-oj-action="[[refresh]]">
+         تحديث
+      </oj-button> -->
+   </div>
+   <div class="details-content">
+      <h1 class="header-title">معلومات المواطن</h1>
+
+      <br><br>
+
+      <oj-form-layout max-columns='2' label-edge='start' label-width="20%">
+         <oj-input-text id="firstName" style="max-width:90%" readonly value="[[personalDetailsData().idNum]]"
+            label-hint="رقم الهوية"></oj-input-text>
+         <oj-input-text id="firstName" style="max-width:90%" readonly value="[[personalDetailsData().firstName]]"
+            label-hint="الاسم الاول"></oj-input-text>
+         <oj-input-text id="fatherFirstName" style="max-width:90%" readonly
+            value="[[personalDetailsData().fatherFirstName]]" label-hint="الاسم الاول للاب"></oj-input-text>
+         <oj-input-text id="fatherSecondName" style="max-width:90%" readonly
+            value="[[personalDetailsData().fatherSecondName]]" label-hint="الاسم الثانى للاب"></oj-input-text>
+
+         <oj-input-text id="familyName" style="max-width:90%" readonly value="[[personalDetailsData().familyName]]"
+            label-hint="اسم العائلة"></oj-input-text>
+         <oj-input-text id="birthDateStart" style="max-width:90%" readonly value="[[personalDetailsData().nationality]]"
+            label-hint="الدولة"></oj-input-text>
+         <oj-input-text id="placeNo" style="max-width:90%" readonly value="[[liveOrDie()]] "
+            label-hint="على قيد الحياة"></oj-input-text>
+
+         <oj-input-text id="policestationCodeOfAddress" style="max-width:90%" readonly value="[[maleOrFemale()]]"
+            label-hint="النوع"></oj-input-text>
+
+         <oj-input-text id="birthDateEnd" style="max-width:90%" readonly value="[[personalDetailsData().birthDate]]"
+            label-hint="تاريخ الميلاد"></oj-input-text>
+         <oj-input-text id="motherName" style="max-width:90%" readonly
+            value="[[personalDetailsData().governorateOfBirthDescr]]" label-hint="محافظة الميلاد"></oj-input-text>
+         <oj-input-text id="policestationCodeOfAddress" style="max-width:90%" readonly
+            value="[[personalDetailsData().policeStationOfBirthDescr]]" label-hint="قسم شرطة الميلاد"></oj-input-text>
+         <oj-input-text id="placeNo" readonly style="max-width:90%" value="[[personalDetailsData().job]]"
+            label-hint="الوظيفة"></oj-input-text>
+         <oj-input-text id="placeNo" readonly style="max-width:90%" value="[[personalDetailsData().streetOfAddress]]"
+            label-hint="عنوان الشارع"></oj-input-text>
+         <oj-input-text id="placeNo" readonly style="max-width:90%"
+            value="[[personalDetailsData().policestationOfAddressDescr]]" label-hint="عنوان القسم التابع له">
+         </oj-input-text>
+         <oj-input-text id="placeNo" readonly style="max-width:90%" value="[[personalDetailsData().fcn]]"
+            label-hint="رقم المصنع"></oj-input-text>
+         <oj-input-text id="placeNo" readonly style="max-width:90%" value="[[personaSpouseData().fullName]]"
+            label-hint="اسم الزوج/الزوجة"></oj-input-text>
+      </oj-form-layout>
+      <br>
+      <h2 class="header-title">بيانات الوالدين</h2>
+      <br>
+      <oj-form-layout max-columns='2' label-edge='start' class="details-content">
+         <h4>الأب</h4>
+         <div>
+            <oj-button on-oj-action="[[fatherdoSearch]]" class="oj-button-lg" style="margin-right:50%;  ">بحث تفاصيل
+               الأب
+            </oj-button>
+         </div>
+
+         <oj-input-text clas id="fatherId" style="max-width:90%" readonly value="[[personalDetailsData().fatherIdNum]]"
+            label-hint="الرقم القومي للأب"></oj-input-text>
+
+         <oj-input-text id="fatherFirstName" style="max-width:90%" readonly
+            value="[[personalDetailsData().fatherFirstName]]" label-hint="الاسم الاول للاب"></oj-input-text>
+         <oj-input-text id="fatherSecondName" style="max-width:90%" readonly
+            value="[[personalDetailsData().fatherSecondName]]" label-hint="الاسم الثانى للاب"></oj-input-text>
+         <oj-input-text id="familyName" style="max-width:90%" readonly value="[[personalDetailsData().familyName]]"
+            label-hint="اسم العائلة"></oj-input-text>
+         <oj-input-text id="placeDescription" style="max-width:90%" readonly
+            value="[[personalDetailsData().fathernationality]]" label-hint="جنسية الأب"></oj-input-text>
+         <oj-input-text id="placeNo" style="max-width:90%" readonly value="[[personalDetailsData().fatherBirthDate]]"
+            label-hint="تاريخ ميلاد الأب"></oj-input-text>
+         <h4>الأم</h4>
+         <div>
+            <oj-button on-oj-action="[[motherdoSearch]]" class="oj-button-lg" style="margin-right: 50%;"> بحث تفاصيل
+               الأم</oj-button>
+
+         </div>
+         <oj-input-text id="motherId" style="max-width:90%;" readonly value=" [[personalDetailsData().motherIdNum]]"
+            label-hint="الرقم القومي للأم">
+         </oj-input-text>
+
+         <oj-input-text id="fatherFirstName" style="max-width:90%" readonly
+            value="[[personalDetailsData().motherFirstName]]" label-hint="الاسم الاول للأم"></oj-input-text>
+         <oj-input-text id="fatherSecondName" style="max-width:90%" readonly
+            value="[[personalDetailsData().motherSecondName]]" label-hint="الاسم الثانى للام"></oj-input-text>
+         <oj-input-text id="fatherSecondName" style="max-width:90%" readonly
+            value="[[personalDetailsData().motherThirdName]]" label-hint="الاسم الثالث للام"></oj-input-text>
+         <oj-input-text id="placeNo" style="max-width:90%" readonly value="[[personalDetailsData().mothernationality]]"
+            label-hint="جنسية الام"></oj-input-text>
+         <oj-input-text id="placeNo" style="max-width:90%" readonly value="[[personalDetailsData().motherBirthDate]]"
+            label-hint="تاريخ ميلاد الأم"></oj-input-text>
+
+      </oj-form-layout>
+
+   </div>
+</div>
+
+
+
+<!--
+<oj-dialog id="dialog"  style="display:none" dialog-title="Modal Dialog">
+   <div slot = "body">
+  
+   </div>
+  <div slot = "footer">
+<oj-button on-oj-action="[[cancel]]"></oj-button>
+<oj-button on-oj-action="[[refresh]]"></oj-button>
+   </div>
+</oj-dialog>
+-->

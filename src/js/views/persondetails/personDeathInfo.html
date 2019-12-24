@@ -1,0 +1,61 @@
+<br>
+<div class="person-details">
+
+
+    <div class="details-content">
+        <oj-messages messages="[[errorMessagesProvider]]" position="{}" display="notification"></oj-messages>
+        <!--<oj-messages messages="[[errorMessagesProvider]]"></oj-messages>-->
+        <div id="loadPanel" data-bind="visible:showLoadDialog" style=float:left>
+            <!-- <span style="color:red">جارى التحميل...</span>
+<oj-button on-oj-action="[[refresh]]">
+تحديث
+</oj-button> -->
+        </div>
+
+
+        <h1 class="header-title">معلومات الوفاة</h1>
+
+
+
+        <br><br>
+
+        <oj-form-layout max-columns='2' label-edge='start' label-width="20%">
+            <oj-input-text id="firstName" style="max-width:90%" readonly value="[[personalDeathData().idNum]]"
+                label-hint="الرقم القومي"></oj-input-text>
+            <oj-input-text id="firstName" style="max-width:90%" readonly value="[[personalDeathData().firstName]]"
+                label-hint="الاسم الاول"></oj-input-text>
+            <oj-input-text id="fatherFirstName" style="max-width:90%" readonly
+                value="[[personalDeathData().fatherFirstName]]" label-hint="الاسم الاول للأب"></oj-input-text>
+            <oj-input-text id="fatherSecondName" style="max-width:90%" readonly
+                value="[[personalDeathData().fatherSecondName]]" label-hint="الاسم الثاني للأب"></oj-input-text>
+            <oj-input-text id="familyName" style="max-width:90%" readonly value="[[personalDeathData().familyName]]"
+                label-hint="اسم العائلة"></oj-input-text>
+            <oj-input-text id="fatherFirstName" style="max-width:90%" readonly
+                value="[[personalDeathData().motherFirstName]]" label-hint="الاسم الاول للأم"></oj-input-text>
+            <oj-input-text id="firstName" style="max-width:90%" readonly
+                value="[[personalDeathData().motherSecondName]]" label-hint="الاسم الثاني للأم"></oj-input-text>
+            <oj-input-text id="firstName" style="max-width:90%" readonly value="[[personalDeathData().motherThirdName]]"
+                label-hint="الاسم الثالث للأم"></oj-input-text>
+            <oj-input-text id="fatherFirstName" style="max-width:90%" readonly
+                value="[[personalDeathData().nationality]]" label-hint="الجنسية"></oj-input-text>
+            <oj-input-text id="fatherSecondName" style="max-width:90%" readonly
+                value="[[personalDeathData().birthDate]]" label-hint="تاريخ الميلاد"></oj-input-text>
+            <oj-input-text id="familyName" style="max-width:90%" readonly
+                value="[[personalDeathData().governorateOfBirth]]" label-hint="محافظة الميلاد"></oj-input-text>
+            <oj-input-text id="fatherFirstName" style="max-width:90%" readonly
+                value="[[personalDeathData().policeStationOfBirth]]" label-hint="القسم التابع للميلاد"></oj-input-text>
+            <oj-input-text id="firstName" style="max-width:90%" readonly value="[[maleOrFemale()]]" label-hint="النوع">
+            </oj-input-text>
+            <oj-input-text id="firstName" style="max-width:90%" readonly
+                value="[[personalDeathData().fathernationality]]" label-hint="جنسية الوالد"></oj-input-text>
+            <oj-input-text id="fatherFirstName" style="max-width:90%" readonly value="[[personalDeathData().deathDate]]"
+                label-hint="تاريخ الوفاة"></oj-input-text>
+            <oj-input-text id="fatherSecondName" style="max-width:90%" readonly
+                value="[[personalDeathData().deathRegNo]]" label-hint="رقم منطقة الوفاة"></oj-input-text>
+
+
+        </oj-form-layout>
+    </div>
+
+    <br><br>
+</div>

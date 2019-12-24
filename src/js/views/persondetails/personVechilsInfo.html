@@ -1,0 +1,29 @@
+<br>
+<div class="details-content">
+  <!--  <oj-messages messages="[[errorMessagesProvider]]"></oj-messages>-->
+
+  <oj-messages messages="[[errorMessagesProvider]]" position="{}" display="notification"></oj-messages>
+  <div id="loadPanel" data-bind="visible:showLoadDialog" style=float:left>
+    <!-- <span style="color:red">جارى التحميل...</span>
+<oj-button on-oj-action="[[refresh]]">
+تحديث
+</oj-button> -->
+  </div>
+
+  <h1 class="header-title">معلومات المركبات</h1>
+  <br><br><br><br>
+
+  <oj-table id='table' aria-label='Departments Table' data-bind="event: {selectionChanged: tableListener}"
+    data='[[pagingDataProvider]]' style="width: 100%" selection-mode='{"row": "multiple", "column": "multiple"}'
+    dnd='{"reorder": {"columns": "enabled"}}' columns='[[tableColumns]]'>
+  </oj-table>
+  <oj-paging-control id="paging" data="[[pagingDataProvider]]" page-size="10" slot="bottom">
+  </oj-paging-control>
+</div>
+
+<script type="text/html" id="serial">
+  <td>
+    <oj-bind-text value="[[$context.cellContext.status.rowIndex + 1]]"></oj-bind-text>
+    <!--    <span data-bind="text:$parent.getCol($context)"></span>-->
+  </td>
+</script>

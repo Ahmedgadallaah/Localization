@@ -1,0 +1,181 @@
+<div class="oj-hybrid-padding">
+  <!-- <oj-messages messages="[[errorInputMessagesProvider]]" position="{}" display="notification"></oj-messages> -->
+  <oj-messages messages="[[errorMessagesProvider]]" position="{}" display="notification"></oj-messages>
+  <oj-label>أدخل طريقة الإستعلام</oj-label>
+  <oj-validation-group id="tracker" valid="{{ groupValid }}">
+
+    <oj-radioset class="oj-choice-direction-row" id="radioSetId" labelled-by="mainlabelid"
+      value="{{currentSearchType}}">
+      <oj-bind-if test="[[showNationalId()]]">
+        <oj-option id="natnoid" value="[[1]]"> الرقم القومى</oj-option>
+
+        <oj-form-layout id="form-container" max-columns='3' label-edge='start' label-width="50%">
+
+          <oj-input-text clear-icon="conditional" id="personalIdentity" enabled
+            messages-custom="[[identityNumMessages]]" data-bind="value: idValue,css:{greenStyle:currentSearchType()==1}"
+            disabled="{{ currentSearchType()!=1 }}" value="{{ idValue }}" raw-value="{{ idValue }}"
+            label-hint="رقم الهوية"></oj-input-text>
+
+
+
+          <oj-button class="oj-button-lg" disabled="[[isSearchButtonDisabled]]" on-oj-action="[[doSearch]]">بحث
+            <span style="color:blue ;font-weight: bold;display: none" id="doSearchId_loader"
+              class="fa fa-spinner fa-spin fa-2x"></span>
+          </oj-button>
+        </oj-form-layout>
+      </oj-bind-if>
+
+      <oj-bind-if test="[[showOthersSection()]]">
+        <hr>
+        <oj-option id="othersid" value="[[2]]"> بيانات اخرى</oj-option>
+        <oj-form-layout id="form-container" max-columns='4' label-edge='start' label-width="50%">
+
+          <oj-bind-if test="[[showFullName() || showFirstName()]]">
+            <oj-input-text clear-icon="conditional" id="firstName" value="{{firstName}}"
+              data-bind="css:{greenStyle:currentSearchType()==2}" disabled="{{ currentSearchType()!=2 }}"
+              label-hint="الاسم الاول">
+            </oj-input-text>
+
+          </oj-bind-if>
+
+          <oj-bind-if test="[[showFatherName()||showFullName()]]">
+            <oj-input-text clear-icon="conditional"
+              data-bind="css:{greenStyle:currentSearchType()==2,disable:currentSearchType()!=2}"
+              disabled="{{ currentSearchType()!=2 }}" id="fatherFirstName" value="{{fatherFirstName}}"
+              label-hint="الاسم الاول للاب">
+            </oj-input-text>
+
+            <oj-input-text clear-icon="conditional"
+              data-bind="css:{greenStyle:currentSearchType()==2,disable:currentSearchType()!=2}"
+              disabled="{{ currentSearchType()!=2 }}" id="fatherSecondName" value="{{fatherSecondName}}"
+              label-hint="الاسم الثانى للاب"></oj-input-text>
+
+            <oj-input-text clear-icon="conditional" data-bind="css:{greenStyle:currentSearchType()==2}"
+              disabled="{{ currentSearchType()!=2 }}" disabled="{{ currentSearchType()!=2 }}" id="familyName"
+              value="{{familyName}}" label-hint="اسم العائلة">
+            </oj-input-text>
+          </oj-bind-if>
+          <oj-bind-if test="[[showBirthDate()]]">
+            <oj-input-date data-bind="css:{greenStyle:currentSearchType()==2}" disabled="[[ currentSearchType()!=2 ]]"
+              clear-icon="conditional" id="birthDateStart" value="{{birthDateStart}}" label-hint="تاريخ الميلاد من">
+            </oj-input-date>
+
+            <oj-input-date data-bind="css:{greenStyle:currentSearchType()==2}" disabled="{{ currentSearchType()!=2 }}"
+              clear-icon="conditional" id="birthDateEnd" value="{{birthDateEnd}}" label-hint="تاريخ الميلاد الى">
+            </oj-input-date>
+          </oj-bind-if>
+
+          <oj-bind-if test="[[showMotherName()]]">
+            <oj-input-text data-bind="css:{greenStyle:currentSearchType()==2}" disabled="{{ currentSearchType()!=2 }}"
+              clear-icon="conditional" id="motherName" value="{{motherName}}" label-hint="اسم الام"></oj-input-text>
+          </oj-bind-if>
+          <oj-bind-if test="[[showAddress()]]">
+            <oj-input-text data-bind="css:{greenStyle:currentSearchType()==2}" disabled="{{ currentSearchType()!=2 }}"
+              clear-icon="conditional" id="policestationCodeOfAddress" value="{{policestationCodeOfAddress}}"
+              label-hint="كود قسم الشرطة">
+            </oj-input-text>
+
+            <oj-input-text data-bind="css:{greenStyle:currentSearchType()==2}" disabled="{{ currentSearchType()!=2 }}"
+              clear-icon="conditional" id="placeDescription" value="{{placeDescription}}" label-hint="مكان الاقامة">
+            </oj-input-text>
+            <oj-input-text data-bind="css:{greenStyle:currentSearchType()==2}" disabled="{{ currentSearchType()!=2 }}"
+              clear-icon="conditional" id="placeNo" value="{{placeNo}}" label-hint="رقم العقار"></oj-input-text>
+            <oj-label for="combobox">إختر المحافظة</oj-label>
+            <oj-select-one data-bind="css:{greenStyle:currentSearchType()==2}" disabled="{{ currentSearchType()!=2 }}"
+              id="select" options="[[govs]]" value="{{governorateCodeOfAddress}}"></oj-select-one>
+          </oj-bind-if>
+
+
+          <!-- disabled="[[isSearchButtonDisabled]]" -->
+          <oj-button disabled="[[isButtonDisabled]]" class="oj-button-lg" style="margin-right: 165px;"
+            on-oj-action="[[doSearch]]">بحث
+            <span style="color:blue ;font-weight: bold;display: none;" id="doSearchOthers_loader"
+              class="fa fa-spinner fa-spin fa-2x"></span>
+          </oj-button>
+
+        </oj-form-layout>
+      </oj-bind-if>
+    </oj-radioset>
+  </oj-validation-group>
+  <!-- <h2 id="load">جاري تحميل البيانات</h2>
+  <div id="loader" class="loader"></div> -->
+
+
+
+  <!-- <oj-bind-if test="[[personInfoData().length == 0]]">
+    <h3 class="header-title" style="text-align:center">بيانات المواطن</h3>
+    <span style="color:red;font-weight: bold;font-size: 2em;">لايوجد بيانات</span>
+  </oj-bind-if> -->
+  <oj-bind-if test="[[ showPersonTable() && personInfoData().length>0 ]]">
+    <h3 class="header-title" style="text-align:center">بيانات المواطن</h3>
+    <oj-table data-bind="event: {selectionChanged: personTableListener}" id="persontable" aria-label="Departments Table"
+      data="[[personPagingDataProvider]]" selection-mode='{"row": "multiple", "column": "multiple"}'
+      dnd='{"reorder": {"columns": "enabled"}}' columns="[[personColumns]]" style="width: 100%; height: 200px;">
+      <!-- <oj-paging-control id="paging" data="[[pagingDataProvider]]" page-size="1" slot="bottom">
+                                          </oj-paging-control> -->
+
+      <oj-paging-control id="paging1" data="[[personPagingDataProvider]]" page-size="10" slot="bottom">
+      </oj-paging-control>
+    </oj-table>
+
+
+  </oj-bind-if>
+
+
+  <!-- <oj-bind-if test="[[spouseInfoData().length == 0  && showSpouseTable()]]">
+    <h3 class="header-title" style="text-align:center">بيانات الزواج</h3>
+    <span style="color:red;font-weight: bold;font-size: 2em;">لايوجد بيانات</span>
+  </oj-bind-if> -->
+  <oj-bind-if test="[[ showSpouseTable() && spouseInfoData().length>0]]">
+    <!-- <oj-input-text clear-icon="conditional" id="myInput"  on-raw-value-changed="[[filter]]" value="{{myInput}}" placeholder="Search">
+          </oj-input-text> -->
+    <h3 class="header-title" style="text-align:center">بيانات الزواج</h3>
+    <oj-table data-bind="event: {selectionChanged: spouseTableListener}" id="spousetable" aria-label="Departments Table"
+      data="[[spousePagingDataProvider]]" selection-mode='{"row": "multiple", "column": "multiple"}'
+      dnd='{"reorder": {"columns": "enabled"}}' columns="[[spouseColumns]]" style="width: 100%; height: 200px;">
+      <!-- <oj-paging-control id="paging" data="[[pagingDataProvider]]" page-size="1" slot="bottom">
+                                            </oj-paging-control> -->
+      <oj-paging-control id="paging2" data="[[spousePagingDataProvider]]" page-size="10" slot="bottom">
+      </oj-paging-control>
+    </oj-table>
+
+
+  </oj-bind-if>
+
+
+
+
+
+
+  <!-- <oj-bind-if test="[[deathInfoData().length == 0  && showDeathTable()]]">
+    <h3 class="header-title" style="text-align:center">بيانات الوفاة</h3>
+    <span style="color:red;font-weight: bold;font-size: 2em;">لايوجد بيانات</span>
+  </oj-bind-if> -->
+  <oj-bind-if test="[[showDeathTable() && deathInfoData().length>0]]">
+    <!-- <oj-input-text clear-icon="conditional" id="myInput"  on-raw-value-changed="[[filter]]" value="{{myInput}}" placeholder="Search">
+          </oj-input-text> -->
+    <h3 class="header-title" style="text-align:center">بيانات الوفاة</h3>
+
+    <oj-table data-bind="event: {selectionChanged: deathTableListener}" id="deathtable" aria-label="Departments Table"
+      data="[[deathPagingDataProvider]]" selection-mode='{"row": "multiple", "column": "multiple"}'
+      dnd='{"reorder": {"columns": "enabled"}}' columns="[[deathColumns]]" style="width: 100%; height: 200px;">
+      <!-- <oj-paging-control id="paging" data="[[pagingDataProvider]]" page-size="1" slot="bottom">
+                                            </oj-paging-control> -->
+
+      <oj-paging-control id="paging3" data="[[deathPagingDataProvider]]" page-size="10" slot="bottom">
+      </oj-paging-control>
+    </oj-table>
+
+
+  </oj-bind-if>
+
+
+
+
+</div>
+<script type="text/html" id="serial">
+  <td>
+    <oj-bind-text value="[[$context.cellContext.status.rowIndex + 1]]"></oj-bind-text>
+    <!--    <span data-bind="text:$parent.getCol($context)"></span>-->
+  </td>
+</script>

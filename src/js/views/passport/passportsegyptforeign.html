@@ -1,0 +1,132 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+-->
+<oj-messages messages="[[errorMessagesProvider]]" position="{}" display="notification"></oj-messages>
+<div class="oj-flex">
+  <!-- <oj-flex class="oj-sm-12"> -->
+  <!-- <h1 class="header-title">الاستعلام عن المعلومات الشخصية  للسجين</h1>
+            <div class="header-paragraph">
+                يمكنك من هنا الاستعلام عن المعلومات الشخصية  للسجين من خلال طريقتين.
+            </div> -->
+  <oj-radioset id="radioSetId" labelled-by="mainlabelid" value="{{ currentSearchType }}">
+    <oj-bind-if test="[[showPassportNo()]]">
+      <oj-option id="passnoid" value="[[1]]">رقم الجواز</oj-option>
+      <oj-form-layout id="myform" max-columns='4' label-edge='start' label-width="50%">
+        <!-- <oj-bind-if test="[[currentSearchType() == 1]]"> -->
+        <oj-input-text data-bind="css:{greenStyle:currentSearchType()==1}" raw-value="{{ pass_no }}"
+          disabled="[[ currentSearchType()!=1 ]]" clear-icon="conditional" id="pass_no" value="{{pass_no}}"
+          label-hint="رقم الجواز">
+        </oj-input-text>
+        <oj-button id="submit passportEgy_loader" style="margin-right:10%;" class="oj-button-lg"
+          on-oj-action="[[doSearch]]" disabled=[[isPassNoButtonDisabled]]> بحث
+        </oj-button>
+      </oj-form-layout>
+    </oj-bind-if>
+    <!-- </oj-bind-if> -->
+    <!-- <oj-bind-if test="[[currentType()==1]]"> -->
+    <oj-bind-if test="[[showNationalId()]]">
+      <oj-option id="natnoid" value="[[2]]"> الرقم القومى</oj-option>
+      <oj-form-layout id="myform" max-columns='4' label-edge='start' label-width="50%">
+        <!-- <oj-bind-if test="[[currentSearchType() == 2]]"> -->
+        <oj-input-text clear-icon="conditional" messages-custom="[[identityNumMessages]]"
+          data-bind="css:{greenStyle:currentSearchType()==2}" disabled="[[currentSearchType()!=2]]" id="natid"
+          value="{{natid}}" raw-value="{{natid}}" label-hint="الرقم القومي">
+        </oj-input-text>
+        <oj-button disabled="[[isNationalIdButtonDisabled]]" id="submit passportEgy_loader" style="margin-right:10%;"
+          class="oj-button-lg" on-oj-action="[[doSearch]]"> بحث
+        </oj-button>
+        <!-- </oj-bind-if> -->
+      </oj-form-layout>
+
+      <!-- </oj-bind-if> -->
+      <!-- </oj-bind-if> -->
+      <oj-bind-if test="[[showOthers()]]">
+        <oj-option id="othersid" value="[[3]]"> بيانات اخرى </oj-option>
+        <oj-form-layout id="myform" max-columns='4' label-edge='start' label-width="50%">
+          <!-- <oj-bind-if test="[[currentSearchType() == 3]]"> -->
+          <oj-input-text data-bind="value: pname,css:{greenStyle:currentSearchType()==3}"
+            disabled="[[ currentSearchType()!=3 ]]" clear-icon="conditional" id="pname" value="{{pname}}"
+            label-hint="الإسم"></oj-input-text>
+
+          <oj-bind-if test="[[showBirthDate()]]">
+            <oj-input-date data-bind="value: pbirthdatefrom,css:{greenStyle:currentSearchType()==3}"
+              disabled="[[ currentSearchType()!=3 ]]" clear-icon="conditional" id="birthDateStart"
+              value="{{pbirthdatefrom}}" label-hint="تاريخ الميلاد من">
+            </oj-input-date>
+            <oj-input-date data-bind="value: pbirthdateto,css:{greenStyle:currentSearchType()==3}"
+              disabled="[[ currentSearchType()!=3 ]]" clear-icon="conditional" id="birthDateEnd"
+              value="{{pbirthdateto}}" label-hint="تاريخ الميلاد الى">
+            </oj-input-date>
+          </oj-bind-if>
+
+          <oj-bind-if test="[[showTransDate()]]">
+            <oj-input-date data-bind="value: pmovementdatefrom,css:{greenStyle:currentSearchType()==3}"
+              disabled="[[ currentSearchType()!=3 ]]" clear-icon="conditional" id="birthDateStart"
+              value="{{pmovementdatefrom}}" label-hint="تاريخ الحركة من">
+            </oj-input-date>
+            <oj-input-date data-bind="value: pmovementdateto,css:{greenStyle:currentSearchType()==3}"
+              disabled="[[ currentSearchType()!=3 ]]" clear-icon="conditional" id="birthDateEnd"
+              value="{{pmovementdateto}}" label-hint="تاريخ الحركة إلي">
+            </oj-input-date>
+          </oj-bind-if>
+
+          <!-- </oj-bind-if> -->
+
+          <oj-button id="submit passportEgy_loader" style="margin-right:10%;" class="oj-button-lg"
+            on-oj-action="[[doSearch]]" disabled=[[isOthersButtonDisabled]]> بحث
+          </oj-button>
+
+
+        </oj-form-layout>
+
+      </oj-bind-if>
+  </oj-radioset>
+  <br>
+  <!-- </oj-flex> -->
+
+  <div class="oj-hybrid-padding">
+
+
+
+
+    <!-- <h2 id="load">جاري تحميل البيانات</h2>
+    <div id="loader" class="loader"></div> -->
+    <!-- <oj-bind-if test="[[redrivedData().length > 0]]"> -->
+
+  </div>
+
+  <oj-bind-if test="[[showEgyptCardsTable()]]">
+
+    <oj-module role="main" class="oj-web-applayout-max-width oj-web-applayout-content"
+      config="[[moduleConfigEgyptCards]]">
+    </oj-module>
+
+  </oj-bind-if>
+
+  <oj-bind-if test="[[showEgyptPortsTable()]]">
+
+
+    <oj-module role="main" class="oj-web-applayout-max-width oj-web-applayout-content"
+      config="[[moduleConfigEgyptPorts]]">
+    </oj-module>
+
+  </oj-bind-if>
+  <oj-bind-if test="[[showForeignCardsTable()]]">
+
+
+    <oj-module role="main" class="oj-web-applayout-max-width oj-web-applayout-content"
+      config="[[moduleConfigForeignCards]]">
+    </oj-module>
+
+  </oj-bind-if>
+
+  <oj-bind-if test="[[showForeignPortsTable()]]">
+
+
+    <oj-module role="main" class="oj-web-applayout-max-width oj-web-applayout-content"
+      config="[[moduleConfigForeignPorts]]">
+    </oj-module>
+
+  </oj-bind-if>
+</div>

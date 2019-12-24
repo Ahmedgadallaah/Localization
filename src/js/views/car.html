@@ -1,0 +1,84 @@
+<br>
+<div class="details-content">
+
+
+
+    <h1 class="header-title">معلومات المركبة</h1>
+    <div class="header-paragraph">
+        التفاصيل الخاصة بالمركبة
+    </div>
+
+    <br><br>
+    <h2>بيانات المالك</h2>
+
+    <oj-button on-oj-action="[[function(){gotoPersonDetails(carDetails().PNUM)}]]">بحث تفاصيل المالك</oj-button>
+
+    <oj-form-layout max-columns='2' label-edge='start' label-width="40%" class="car-details details-content">
+
+        <oj-input-text id="PNAME" style="max-width:90%" readonly value="[[carDetails().PNAME]]"
+            label-hint=" اسم المالك "></oj-input-text>
+        <oj-input-text id="PNUM" style="max-width:90%" readonly value="[[carDetails().PNUM]]"
+            label-hint=" الرقم القومي  "></oj-input-text>
+
+        <oj-input-text id="ADDRESS" style="max-width:90%" readonly value="[[carDetails().ADDRESS]]"
+            label-hint="العنوان"></oj-input-text>
+        <oj-input-text id="ADDRESSPOLICESTATIONNAME" style="max-width:90%" readonly
+            value="[[carDetails().ADDRESSPOLICESTATIONNAME]]" label-hint=" قسم شرطة"></oj-input-text>
+
+    </oj-form-layout>
+
+
+    <h2> بيانات المركبة التفصيلية</h2>
+    <oj-form-layout max-columns='2' label-edge='start' label-width="40%" class="car-details details-content">
+
+        <oj-input-text id="FORMNAME" style="max-width:90%" readonly value="[[carDetails().FORMNAME]]"
+            label-hint="النوع"></oj-input-text>
+        <oj-input-text id="MAKENAME" style="max-width:90%" readonly value="[[carDetails().MAKENAME]]"
+            label-hint=" الشركة المصنعة"></oj-input-text>
+        <oj-input-text id="MODELNAME" style="max-width:90%" readonly value="[[carDetails().MODELNAME]]"
+            label-hint=" نوع الموديل"></oj-input-text>
+        <oj-input-text id="MANUFACTUREYEAR" style="max-width:90%" readonly value="[[carDetails().MANUFACTUREYEAR]]"
+            label-hint=" تاريخ التصنيع"></oj-input-text>
+        <oj-input-text id="COLORNAME" style="max-width:90%" readonly value="[[carDetails().COLORNAME]]"
+            label-hint="اللون"></oj-input-text>
+        <oj-input-text id="CHASSISNUM" style="max-width:90%" readonly value="[[carDetails().CHASSISNUM]]"
+            label-hint=" رقم الشاسيه"></oj-input-text>
+        <oj-input-text id="ENGINNUM" style="max-width:90%" readonly value="[[carDetails().ENGINNUM]]"
+            label-hint="رقم المحرك"></oj-input-text>
+        <oj-bind-if test='[[carDetails().ISOLD == 0]]'>
+            <oj-input-text id="ENGINNUM" style="max-width:90%" readonly value="جديدة" label-hint="جديدة\ قديمة">
+            </oj-input-text>
+        </oj-bind-if>
+        <oj-bind-if test='[[carDetails().ISOLD == 1]]'>
+            <oj-input-text id="ENGINNUM" style="max-width:90%" readonly value="قديمة" label-hint="جديدة\ قديمة">
+            </oj-input-text>
+        </oj-bind-if>
+    </oj-form-layout>
+
+    <h2>بيانات الترخيص</h2>
+    <oj-form-layout max-columns='2' label-edge='start' label-width="40%" class="car-details details-content">
+        <oj-input-text id="PLATENUM" style="max-width:90%" readonly value="[[carDetails().PLATENUM]]"
+            label-hint=" رقم اللوحة"></oj-input-text>
+        <oj-input-text id="PLATETYPENAME" style="max-width:90%" readonly value="[[carDetails().PLATETYPENAME]]"
+            label-hint=" نوع اللوحة "></oj-input-text>
+        <oj-input-text id="GOVNAME" style="max-width:90%" readonly value="[[carDetails().GOVNAME]]"
+            label-hint=" المحافظة"></oj-input-text>
+        <oj-input-text id="ISSUEPLACENAME" style="max-width:90%" readonly value="[[carDetails().ISSUEPLACENAME]]"
+            label-hint="وحدة المرور"></oj-input-text>
+        <oj-input-text id="ISSUEDATE" style="max-width:90%" readonly value="[[carDetails().ISSUEDATE]]"
+            label-hint="  تاريخ إصدار الرخصة"></oj-input-text>
+        <oj-input-text id="EXPIRYDATE" style="max-width:90%" readonly value="[[carDetails().EXPIRYDATE]]"
+            label-hint=" تاريخ الإنتهاء"></oj-input-text>
+        <oj-input-text id="INSURANCENUMBER" style="max-width:90%" readonly value="[[carDetails().INSURANCENUMBER]]"
+            label-hint=" رقم التأمين"></oj-input-text>
+        <oj-input-text id="INSCOMPANY" style="max-width:90%" readonly value="[[carDetails().INSCOMPANY]]"
+            label-hint=" شركة التأمين"></oj-input-text>
+        <oj-input-text id="INSURANCEDATE" style="max-width:90%" readonly value="[[carDetails().INSURANCEDATE]]"
+            label-hint=" تاريخ التأمين"></oj-input-text>
+        <oj-input-text id="INSURANCEEXPIRYDATE" style="max-width:90%" readonly
+            value="[[carDetails().INSURANCEEXPIRYDATE]]" label-hint=" تاريخ إنتهاء التأمين"></oj-input-text>
+    </oj-form-layout>
+    </oj-form-layout>
+</div>
+
+<br><br>
